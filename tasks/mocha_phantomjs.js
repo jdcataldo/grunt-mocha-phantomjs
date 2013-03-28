@@ -30,7 +30,8 @@ module.exports = function(grunt) {
         urls = options.urls.concat(this.filesSrc);
 
     // Loop through the options and add them to args
-    _.each(options, function(value, key) {
+    // Omit urls from the options to be passed through
+    _.each(_.omit(options, 'urls'), function(value, key) {
       // Convert to the key to a switch
       var sw = (key.length > 1 ? '--' : '-') + key;
       // Add the switch and its value
