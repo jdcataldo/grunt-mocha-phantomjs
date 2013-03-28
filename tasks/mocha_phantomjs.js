@@ -20,8 +20,7 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('mocha_phantomjs', 'Run client-side mocha test with phantomjs.', function() {
     // Merge options
     var options = this.options({
-          // Default phantom js timeout
-          timeout: 5000,
+          reporter: 'spec',
           // Non file urls to test
           urls: []
         }),

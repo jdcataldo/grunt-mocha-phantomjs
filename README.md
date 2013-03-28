@@ -1,6 +1,6 @@
 # grunt-mocha-phantomjs
 
-> Run client-side mochas tests using phantomjs
+> A simple wrapper to run client-side mochas tests using mocha-phantomjs
 
 ## Getting Started
 This plugin requires Grunt `~0.4.0`
@@ -19,71 +19,72 @@ grunt.loadNpmTasks('grunt-mocha-phantomjs');
 
 ## The "mocha_phantomjs" task
 
-### Overview
-In your project's Gruntfile, add a section named `mocha_phantomjs` to the data object passed into `grunt.initConfig()`.
+_Run this task with the `grunt mocha_phantomjs` command._
 
-```js
-grunt.initConfig({
-  mocha_phantomjs: {
-    options: {
-      // Task-specific options go here.
-    },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
-  },
-})
-```
+Task targets, files and options may be specified according to the grunt [Configuring tasks](http://gruntjs.com/configuring-tasks) guide.
+
+[PhantomJS][] is installed when installing using NPM. 
+
+[PhantomJS]: http://www.phantomjs.org/
 
 ### Options
 
-#### options.separator
-Type: `String`
-Default value: `',  '`
+#### reporter
+Type: `String`  
+Default: `spec`
 
-A string value that is used to do something with whatever.
+The reporter that should be used. See [the supported reporters](https://github.com/metaskills/mocha-phantomjs#supported-reporters) for more information.
 
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
+#### urls
+Type: `Array`  
+Default: `[]`
 
-A string value that is used to do something else with whatever else.
+Absolute `http://` or `https://` urls to be passed to PhantomJS. Specified URLs will be merged with any specified `src` files first. Note that urls must be served by a web server, and since this task doesn't contain a web server, one will need to be configured separately. The [grunt-contrib-connect plugin](https://github.com/gruntjs/grunt-contrib-connect) provides a basic web server.
 
-### Usage Examples
+Additional arguments may be passed. See [mocha-phantomjs's](https://github.com/metaskills/mocha-phantomjs#usage) usage.
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+### Usage examples
 
-```js
-grunt.initConfig({
-  mocha_phantomjs: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
-```
-
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+#### Basic usage
 
 ```js
+// Project configuration.
 grunt.initConfig({
   mocha_phantomjs: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
+    all: ['test/**/*.html']
+  }
+});
 ```
 
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+#### Local server
+Include the [grunt-contrib-connect plugin][] to run a local server
+[grunt-contrib-connect plugin]: https://github.com/gruntjs/grunt-contrib-connect
 
-## Release History
-_(Nothing yet)_
+```js
+// Project configuration.
+grunt.initConfig({
+  mocha_phantomjs: {
+    all: {
+      options: {
+        urls: [
+          'http://localhost:8000/test/foo.html',
+          'http://localhost:8000/test/bar.html'
+        ]
+      }
+    }
+  },
+  connect: {
+      server: {
+        options: {
+          port: 8000,
+          base: '.',
+        }
+      }
+    }
+});
+
+grunt.registerTask('test', ['connect', 'mocha_phantomjs']);
+```
+
+### Notes
+This is a very basic implementation of mocha-phantomjs. Failed tests and errors do not bubble up for custom reporting. The idea of this is to be mainly used by a CI and let the CI manage the error reporting.
