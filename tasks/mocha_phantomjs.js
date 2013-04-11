@@ -26,7 +26,7 @@ module.exports = function(grunt) {
         }),
         files   = this.filesSrc,
         args    = [],
-        phantomjs_path = path.join(__dirname, '..', '/node_modules/.bin/mocha-phantomjs'),
+        phantomjs_path = path.join(process.cwd(), '/node_modules/.bin/mocha-phantomjs'),
         urls = options.urls.concat(this.filesSrc);
 
     // Loop through the options and add them to args
