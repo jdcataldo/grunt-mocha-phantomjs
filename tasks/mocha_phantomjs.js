@@ -13,9 +13,7 @@ module.exports = function(grunt) {
       // Alias for Lo-Dash
       _       = util._,
       path = require("path"),
-      EventEmitter = require('events').EventEmitter;
-
-  var asset = path.join.bind(null, __dirname, '..');
+      exists = grunt.file.exists;
 
   grunt.registerMultiTask('mocha_phantomjs', 'Run client-side mocha test with phantomjs.', function() {
     // Merge options
@@ -26,8 +24,26 @@ module.exports = function(grunt) {
         }),
         files   = this.filesSrc,
         args    = [],
-        phantomjs_path = path.join(__dirname, '..', '/node_modules/.bin/mocha-phantomjs'),
+        binPath = 'mocha-phantomjs/bin/mocha-phantomjs',
+        phantomjs_path = path.join(__dirname, '..', '/node_modules/', binPath),
         urls = options.urls.concat(this.filesSrc);
+
+    // Check for a local install of mocha-phantomjs to use
+    if (!exists(phantomjs_path)) {
+      var i = module.paths.length,
+          bin;
+      while(i--) {
+        bin = path.join(module.paths[i], binPath);
+        if (exists(bin)) {
+          phantomjs_path = bin;
+          break;
+        }
+      }
+    }
+
+    if(!exists(phantomjs_path)) {
+      grunt.fail.warn('Unable to find mocha-phantomjs.');
+    }
 
     // Loop through the options and add them to args
     // Omit urls from the options to be passed through
