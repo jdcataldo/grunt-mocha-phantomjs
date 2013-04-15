@@ -1,6 +1,6 @@
 # grunt-mocha-phantomjs
 
-> A simple wrapper to run client-side mochas tests using mocha-phantomjs
+> A simple wrapper to run client-side mocha tests using [mocha-phantomjs](http://metaskills.net/mocha-phantomjs/)
 
 ## Getting Started
 This plugin requires Grunt `~0.4.0`

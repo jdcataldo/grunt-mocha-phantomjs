@@ -20,13 +20,16 @@ module.exports = function(grunt) {
     var options = this.options({
           reporter: 'spec',
           // Non file urls to test
-          urls: []
+          urls: [],
+          verbose: false
         }),
         files   = this.filesSrc,
         args    = [],
         binPath = 'mocha-phantomjs/bin/mocha-phantomjs',
         phantomjs_path = path.join(__dirname, '..', '/node_modules/', binPath),
-        urls = options.urls.concat(this.filesSrc);
+        urls = options.urls.concat(this.filesSrc),
+        done = this.async(),
+        errors = 0;
 
     // Check for a local install of mocha-phantomjs to use
     if (!exists(phantomjs_path)) {
@@ -66,10 +69,16 @@ module.exports = function(grunt) {
         cmd: phantomjs_path,
         args: _.flatten([f].concat(args)),
         opts: {stdio: 'inherit'}
-      }, function(error, result) {
+      }, function(error, result, code) {
+        errors += code;
         next();
       });
-    }, this.async());
+    }, function(){
+      if(errors > 0) {
+        grunt.log.error(errors + " tests failed");
+      }
+      done(errors === 0);
+    });
   });
 
 };
