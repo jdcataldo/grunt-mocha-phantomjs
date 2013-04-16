@@ -86,5 +86,8 @@ grunt.initConfig({
 grunt.registerTask('test', ['connect', 'mocha_phantomjs']);
 ```
 
+### Todo
+  * Add output file option for jenkins
+
 ### Notes
 This is a very basic implementation of mocha-phantomjs. Failed tests and errors do not bubble up for custom reporting. The idea of this is to be mainly used by a CI and let the CI manage the error reporting.
