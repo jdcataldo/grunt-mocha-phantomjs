@@ -75,9 +75,9 @@ module.exports = function(grunt) {
       });
     }, function(){
       if(errors > 0) {
-        grunt.log.error(errors + " tests failed");
+        grunt.fail.warn(errors + " tests failed");
       }
-      done(errors === 0);
+      done();
     });
   });
 
