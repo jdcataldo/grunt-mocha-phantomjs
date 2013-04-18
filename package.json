@@ -1,7 +1,7 @@
 {
   "name": "grunt-mocha-phantomjs",
   "description": "Run client-side mocha tests using phantomjs",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "homepage": "https://github.com/jdcataldo/grunt-mocha-phantomjs",
   "author": {
     "name": "Justin Cataldo",
@@ -20,6 +20,9 @@
       "url": "https://github.com/jdcataldo/grunt-mocha-phantomjs/blob/master/LICENSE-MIT"
     }
   ],
+  "scripts": {
+    "test": "grunt"
+  },
   "main": "Gruntfile.js",
   "engines": {
     "node": ">= 0.8.0"

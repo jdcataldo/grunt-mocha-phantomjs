@@ -106,6 +106,16 @@ grunt.initConfig({
 grunt.registerTask('test', ['connect', 'mocha_phantomjs']);
 ```
 
+## Release History
+
+* 2013-04-18   v0.2.6   Fix path to mocha-phantomjs bindary on windows
+* 2013-04-18   v0.2.5   Added an output option to write test results to a file for CI support
+* 2013-04-15   v0.2.2   Added exit code to report failed tests with Travis CI
+* 2013-04-11   v0.2.1   Added check for existing local install of mocha-phantomjs
+* 2013-04-08   v0.2.0   Update phantomjs to 1.9.0 to fix unzipping issue
+* 2013-03-27   v0.1.1   Fix to omit urls from being passed to phantomjs
+* 2013-03-27   v0.1.0   Initial release supporting all options for mocha-phantomjs
+
 
 ### Notes
 This is a very basic implementation of mocha-phantomjs. Failed tests and errors do not bubble up for custom reporting. The idea of this is to be mainly used by a CI and let the CI manage the error reporting.

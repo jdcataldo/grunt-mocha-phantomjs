@@ -39,6 +39,9 @@ module.exports = function(grunt) {
           bin;
       while(i--) {
         bin = path.join(module.paths[i], binPath);
+        if(process.platform === 'win32') {
+          bin += '.cmd';
+        }
         if (exists(bin)) {
           phantomjs_path = bin;
           break;
