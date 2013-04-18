@@ -35,6 +35,11 @@ Default: `spec`
 
 The reporter that should be used. See [the supported reporters](https://github.com/metaskills/mocha-phantomjs#supported-reporters) for more information.
 
+#### output
+Type: `String`  
+
+The file that the task should output the results to. If `output` is specified, the task will always complete and not throw an error code if errors are found. The CI will determine if the build failed or not.
+
 #### urls
 Type: `Array`  
 Default: `[]`
@@ -45,12 +50,27 @@ Additional arguments may be passed. See [mocha-phantomjs's](https://github.com/m
 
 ### Usage examples
 
-#### Basic usage
+#### Basic usage (CI checks for error code)
 
 ```js
 // Project configuration.
 grunt.initConfig({
   mocha_phantomjs: {
+    all: ['test/**/*.html']
+  }
+});
+```
+
+#### File output for CI
+
+```js
+// Project configuration.
+grunt.initConfig({
+  mocha_phantomjs: {
+    options: {
+      'reporter': 'xunit',
+      'output': 'tests/results/result.xml'
+    },
     all: ['test/**/*.html']
   }
 });
@@ -86,8 +106,6 @@ grunt.initConfig({
 grunt.registerTask('test', ['connect', 'mocha_phantomjs']);
 ```
 
-### Todo
-  * Add output file option for jenkins
 
 ### Notes
 This is a very basic implementation of mocha-phantomjs. Failed tests and errors do not bubble up for custom reporting. The idea of this is to be mainly used by a CI and let the CI manage the error reporting.

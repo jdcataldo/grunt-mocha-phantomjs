@@ -17,19 +17,21 @@ module.exports = function(grunt) {
 
   grunt.registerMultiTask('mocha_phantomjs', 'Run client-side mocha test with phantomjs.', function() {
     // Merge options
-    var options = this.options({
+    var options        = this.options({
           reporter: 'spec',
           // Non file urls to test
           urls: [],
           verbose: false
         }),
-        files   = this.filesSrc,
-        args    = [],
-        binPath = 'mocha-phantomjs/bin/mocha-phantomjs',
+        files          = this.filesSrc,
+        args           = [],
+        binPath        = 'mocha-phantomjs/bin/mocha-phantomjs',
         phantomjs_path = path.join(__dirname, '..', '/node_modules/', binPath),
-        urls = options.urls.concat(this.filesSrc),
-        done = this.async(),
-        errors = 0;
+        urls           = options.urls.concat(this.filesSrc),
+        done           = this.async(),
+        errors         = 0,
+        results        = '',
+        output         = options.output || false;
 
     // Check for a local install of mocha-phantomjs to use
     if (!exists(phantomjs_path)) {
@@ -50,7 +52,7 @@ module.exports = function(grunt) {
 
     // Loop through the options and add them to args
     // Omit urls from the options to be passed through
-    _.each(_.omit(options, 'urls'), function(value, key) {
+    _.each(_.omit(options, 'urls', 'output'), function(value, key) {
       // Convert to the key to a switch
       var sw = (key.length > 1 ? '--' : '-') + key;
       // Add the switch and its value
@@ -65,17 +67,36 @@ module.exports = function(grunt) {
     });
 
     util.async.forEachSeries(urls, function(f, next) {
-      grunt.util.spawn({
+      var phantomjs = grunt.util.spawn({
         cmd: phantomjs_path,
-        args: _.flatten([f].concat(args)),
-        opts: {stdio: 'inherit'}
+        args: _.flatten([f].concat(args))
       }, function(error, result, code) {
-        errors += code;
         next();
       });
+      
+      phantomjs.stdout.pipe(process.stdout);
+      phantomjs.stderr.pipe(process.stderr);
+
+      // Append output to be written to a file
+      if(output) {
+        phantomjs.stdout.on('data', function(data){
+          results += String(data.toString());
+        });
+      }
+
+      phantomjs.on('exit', function(code){
+        if (code === 127) { 
+          grunt.fail.warn("Phantomjs isn't installed"); 
+        }
+        errors += code;
+      });
+
     }, function(){
-      if(errors > 0) {
+      // Fail if errors are reported and we aren't outputing to a file
+      if(!output && errors > 0) {
         grunt.fail.warn(errors + " tests failed");
+      } else {
+        grunt.file.write(options.output, results);
       }
       done();
     });
