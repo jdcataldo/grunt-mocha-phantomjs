@@ -25,7 +25,7 @@ module.exports = function(grunt) {
         }),
         files          = this.filesSrc,
         args           = [],
-        binPath        = 'mocha-phantomjs/bin/mocha-phantomjs',
+        binPath        = '.bin/mocha-phantomjs' + (process.platform === 'win32' ? '.cmd' : ''),
         phantomjs_path = path.join(__dirname, '..', '/node_modules/', binPath),
         urls           = options.urls.concat(this.filesSrc),
         done           = this.async(),
@@ -60,7 +60,7 @@ module.exports = function(grunt) {
       if(!_.isArray(value)) {
         value = [value];
       }
-      
+
       _.each(value, function(value) {
         args.push([sw, value.toString()]);
       });
@@ -73,7 +73,7 @@ module.exports = function(grunt) {
       }, function(error, result, code) {
         next();
       });
-      
+
       phantomjs.stdout.pipe(process.stdout);
       phantomjs.stderr.pipe(process.stderr);
 
@@ -85,8 +85,8 @@ module.exports = function(grunt) {
       }
 
       phantomjs.on('exit', function(code){
-        if (code === 127) { 
-          grunt.fail.warn("Phantomjs isn't installed"); 
+        if (code === 127) {
+          grunt.fail.warn("Phantomjs isn't installed");
         }
         errors += code;
       });
