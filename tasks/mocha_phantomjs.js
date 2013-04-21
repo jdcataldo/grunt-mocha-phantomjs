@@ -93,8 +93,10 @@ module.exports = function(grunt) {
 
     }, function(){
       // Fail if errors are reported and we aren't outputing to a file
-      if(!output && errors > 0) {
-        grunt.fail.warn(errors + " tests failed");
+      if(!output) {
+        if(errors > 0) {
+          grunt.fail.warn(errors + " tests failed");
+        }
       } else {
         grunt.file.write(options.output, results);
       }
