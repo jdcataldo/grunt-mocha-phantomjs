@@ -26,7 +26,7 @@ module.exports = function(grunt) {
         files          = this.filesSrc,
         args           = [],
         binPath        = '.bin/mocha-phantomjs' + (process.platform === 'win32' ? '.cmd' : ''),
-        phantomjs_path = path.join(__dirname, '..', '/node_modules/', binPath),
+        phantomjs_path = path.join(__dirname, '../..', binPath),
         urls           = options.urls.concat(this.filesSrc),
         done           = this.async(),
         errors         = 0,
@@ -39,9 +39,6 @@ module.exports = function(grunt) {
           bin;
       while(i--) {
         bin = path.join(module.paths[i], binPath);
-        if(process.platform === 'win32') {
-          bin += '.cmd';
-        }
         if (exists(bin)) {
           phantomjs_path = bin;
           break;
