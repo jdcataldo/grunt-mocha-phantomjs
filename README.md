@@ -108,8 +108,9 @@ grunt.registerTask('test', ['connect', 'mocha_phantomjs']);
 
 ## Release History
 
+* 2013-04-19   v0.2.8   Fix path to mocha-phantomjs binary on windows when not installed with plugin
 * 2013-04-19   v0.2.7   Fixes error thrown when tests pass and no output file specified
-* 2013-04-18   v0.2.6   Fix path to mocha-phantomjs bindary on windows
+* 2013-04-18   v0.2.6   Fix path to mocha-phantomjs binary on windows
 * 2013-04-18   v0.2.5   Added an output option to write test results to a file for CI support
 * 2013-04-15   v0.2.2   Added exit code to report failed tests with Travis CI
 * 2013-04-11   v0.2.1   Added check for existing local install of mocha-phantomjs
