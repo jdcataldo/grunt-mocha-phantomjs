@@ -20,8 +20,7 @@ module.exports = function(grunt) {
     var options        = this.options({
           reporter: 'spec',
           // Non file urls to test
-          urls: [],
-          verbose: false
+          urls: []
         }),
         files          = this.filesSrc,
         args           = [],

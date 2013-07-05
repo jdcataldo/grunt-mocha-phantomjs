@@ -20,10 +20,31 @@ module.exports = function(grunt) {
       options: {
         jshintrc: '.jshintrc',
       },
+    },
+    mocha_phantomjs: {
+      no_output: {
+        options: {
+          'reporter': 'dot'
+        },
+        files: {
+          src: ['test/index.html']
+        }
+      },
+      output: {
+        options: {
+          'reporter': 'dot',
+          'output': 'results/result.txt'
+        },
+        files: {
+          src: ['test/index.html']
+        }
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.registerTask('default', 'jshint');
+  grunt.loadTasks('tasks');
+
+  grunt.registerTask('default', ['jshint', 'mocha_phantomjs']);
 
 };
