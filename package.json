@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "mocha-phantomjs": "~3.1.x",
-    "phantomjs": "1.9.1-0"
+    "phantomjs": "~1.9.1-0"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.6.0",
