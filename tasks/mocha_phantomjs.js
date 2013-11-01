@@ -32,6 +32,11 @@ module.exports = function(grunt) {
         results        = '',
         output         = options.output || false;
 
+    // disable color if we so choose
+    if (grunt.option('color') === false) {
+        args.push('--no-color');
+    }
+
     // Check for a local install of mocha-phantomjs to use
     if (!exists(phantomjs_path)) {
       var i = module.paths.length,
