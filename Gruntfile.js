@@ -21,6 +21,14 @@ module.exports = function(grunt) {
         jshintrc: '.jshintrc',
       },
     },
+    connect: {
+      server: {
+        options: {
+          port: 8000,
+          base: '.',
+        }
+      }
+    },
     mocha_phantomjs: {
       no_output: {
         options: {
@@ -38,13 +46,20 @@ module.exports = function(grunt) {
         files: {
           src: ['test/index.html']
         }
+      },
+      server: {
+        options: {
+          urls: ['http://localhost:8000/test/index.html'],
+          'reporter': 'dot'
+        }
       }
     }
   });
 
+  grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadTasks('tasks');
 
-  grunt.registerTask('default', ['jshint', 'mocha_phantomjs']);
+  grunt.registerTask('default', ['jshint', 'connect', 'mocha_phantomjs']);
 
 };
