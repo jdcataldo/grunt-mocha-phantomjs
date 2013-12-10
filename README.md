@@ -110,6 +110,7 @@ grunt.registerTask('test', ['connect', 'mocha_phantomjs']);
 
 ## Release History
 
+* 2013-10-31   v0.3.2   Upgrade mocha-phantomjs to 3.2.0
 * 2013-10-31   v0.3.1   Added support for --no-color
 * 2013-07-05   v0.3.0   Upgrade mocha-phantomjs to 3.1.0
 * 2013-04-19   v0.2.8   Fix path to mocha-phantomjs binary on windows when not installed with plugin
