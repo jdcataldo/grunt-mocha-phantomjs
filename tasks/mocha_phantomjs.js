@@ -34,6 +34,7 @@ module.exports = function(grunt) {
         output         = options.output || false;
     
     if(output) {
+      grunt.file.mkdir(path.dirname(output));
       var writeStream = fs.createWriteStream(output);
     }
 
