@@ -12,8 +12,9 @@ module.exports = function(grunt) {
   var util    = grunt.util,
       // Alias for Lo-Dash
       _       = util._,
-      path = require("path"),
-      exists = grunt.file.exists;
+      path    = require("path"),
+      exists  = grunt.file.exists,
+      fs      = require('fs');
 
   grunt.registerMultiTask('mocha_phantomjs', 'Run client-side mocha test with phantomjs.', function() {
     // Merge options
@@ -31,6 +32,10 @@ module.exports = function(grunt) {
         errors         = 0,
         results        = '',
         output         = options.output || false;
+    
+    if(output) {
+      var writeStream = fs.createWriteStream(output);
+    }
 
     // disable color if we so choose
     if (grunt.option('color') === false) {
@@ -81,11 +86,9 @@ module.exports = function(grunt) {
       phantomjs.stdout.pipe(process.stdout);
       phantomjs.stderr.pipe(process.stderr);
 
-      // Append output to be written to a file
+      // Write output to file
       if(output) {
-        phantomjs.stdout.on('data', function(data){
-          results += String(data.toString());
-        });
+        phantomjs.stdout.pipe(writeStream);
       }
 
       phantomjs.on('exit', function(code){
@@ -99,9 +102,8 @@ module.exports = function(grunt) {
       // Fail if errors are reported and we aren't outputing to a file
       if(!output && errors > 0) {
         grunt.fail.warn(errors + " tests failed");
-      } else if(output) {
-        grunt.file.write(output, results);
       }
+
       done();
     });
   });
