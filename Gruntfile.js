@@ -40,8 +40,8 @@ module.exports = function(grunt) {
       },
       output: {
         options: {
-          'reporter': 'dot',
-          'output': 'results/result.txt'
+          'reporter': 'xunit',
+          'output': 'results/result.xml'
         },
         files: {
           src: ['test/index.html']
@@ -51,6 +51,13 @@ module.exports = function(grunt) {
         options: {
           urls: ['http://localhost:8000/test/index.html'],
           'reporter': 'dot'
+        }
+      },
+      coverage: {
+        options: {
+          urls: ['http://localhost:8000/test-cov/index.html'],
+          'reporter': 'json-cov',
+          'output': 'results/coverage.json'
         }
       }
     }
