@@ -89,7 +89,7 @@ module.exports = function(grunt) {
 
       // Write output to file
       if(output) {
-        phantomjs.stdout.pipe(writeStream);
+        phantomjs.stdout.pipe(writeStream, { end: false });
       }
 
       phantomjs.on('exit', function(code){
@@ -103,6 +103,10 @@ module.exports = function(grunt) {
       // Fail if errors are reported and we aren't outputing to a file
       if(!output && errors > 0) {
         grunt.fail.warn(errors + " tests failed");
+      }
+
+      if(output) {
+        writeStream.end();
       }
 
       done();

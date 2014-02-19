@@ -110,6 +110,7 @@ grunt.registerTask('test', ['connect', 'mocha_phantomjs']);
 
 ## Release History
 
+* 2014-02-18   v0.4.2   Fix to prevent the stream from closing
 * 2014-02-18   v0.4.1   Pipe stdout to a file if supplied
 * 2014-01-14   v0.4.0   Upgrade mocha-phantomjs to 3.3.0
 * 2013-10-31   v0.3.2   Upgrade mocha-phantomjs to 3.2.0
