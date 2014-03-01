@@ -9,9 +9,8 @@
 'use strict';
 
 module.exports = function(grunt) {
-  var util    = grunt.util,
-      // Alias for Lo-Dash
-      _       = util._,
+  var _       = require('lodash'),
+      async   = require('async'),
       path    = require("path"),
       exists  = grunt.file.exists,
       fs      = require('fs');
@@ -71,12 +70,12 @@ module.exports = function(grunt) {
         value = [value];
       }
 
-      _.each(value, function(value) {
+      value.forEach(function(value) {
         args.push([sw, value.toString()]);
       });
     });
 
-    util.async.forEachSeries(urls, function(f, next) {
+    async.eachSeries(urls, function(f, next) {
       var phantomjs = grunt.util.spawn({
         cmd: phantomjs_path,
         args: _.flatten([f].concat(args))
