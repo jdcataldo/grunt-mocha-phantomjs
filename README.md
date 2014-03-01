@@ -25,7 +25,7 @@ _Run this task with the `grunt mocha_phantomjs` command._
 
 Task targets, files and options may be specified according to the grunt [Configuring tasks](http://gruntjs.com/configuring-tasks) guide.
 
-[PhantomJS][] is installed when installing using NPM. 
+[PhantomJS][] is installed when installing using NPM.
 
 [PhantomJS]: http://www.phantomjs.org/
 
@@ -110,6 +110,7 @@ grunt.registerTask('test', ['connect', 'mocha_phantomjs']);
 
 ## Release History
 
+* 2014-03-01   v0.4.3   Add lodash and async as dependencies
 * 2014-02-18   v0.4.2   Fix to prevent the stream from closing
 * 2014-02-18   v0.4.1   Pipe stdout to a file if supplied
 * 2014-01-14   v0.4.0   Upgrade mocha-phantomjs to 3.3.0
