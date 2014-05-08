@@ -28,8 +28,8 @@
     "node": ">= 0.8.0"
   },
   "dependencies": {
-    "mocha-phantomjs": "^3.4.0",
-    "phantomjs": "^1.9.7-5",
+    "mocha-phantomjs": "~3.4.0",
+    "phantomjs": "~1.9.x",
     "lodash": "2.4.1",
     "async": "~0.2"
   },
