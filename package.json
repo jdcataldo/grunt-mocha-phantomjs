@@ -1,7 +1,7 @@
 {
   "name": "grunt-mocha-phantomjs",
   "description": "Run client-side mocha tests using phantomjs",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "homepage": "https://github.com/jdcataldo/grunt-mocha-phantomjs",
   "author": {
     "name": "Justin Cataldo",
@@ -28,8 +28,8 @@
     "node": ">= 0.8.0"
   },
   "dependencies": {
-    "mocha-phantomjs": "~3.4.0",
-    "phantomjs": "~1.9.x",
+    "mocha-phantomjs": "^3.5.0",
+    "phantomjs": "~1.9.1",
     "lodash": "2.4.1",
     "async": "~0.2"
   },
