@@ -28,7 +28,7 @@
     "node": ">= 0.8.0"
   },
   "dependencies": {
-    "mocha-phantomjs": "^3.5.0",
+    "mocha-phantomjs": "~3.5.0",
     "phantomjs": "~1.9.1",
     "lodash": "2.4.1",
     "async": "~0.2"
