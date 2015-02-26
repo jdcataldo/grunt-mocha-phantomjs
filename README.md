@@ -116,6 +116,7 @@ grunt.registerTask('test', ['connect', 'mocha_phantomjs']);
 
 ## Release History
 
+* 2015-02-26   v0.6.1   Add silent option to suppress stdout
 * 2014-07-24   v0.6.0   Upgrade mocha-phantomjs to 3.5.0 and drops node 0.8 support
 * 2014-05-08   v0.5.0   Upgrade mocha-phantomjs to 3.4.0
 * 2014-03-01   v0.4.3   Add lodash and async as dependencies
