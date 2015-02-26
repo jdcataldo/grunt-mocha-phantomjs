@@ -47,6 +47,16 @@ module.exports = function(grunt) {
           src: ['test/index.html']
         }
       },
+      silent: {
+        options: {
+          'reporter': 'xunit',
+          'output': 'results/results_silent.xml',
+          'silent': true
+        },
+        files: {
+          src: ['test/index.html']
+        }
+      },
       server: {
         options: {
           urls: ['http://localhost:8000/test/index.html'],

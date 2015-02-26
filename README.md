@@ -42,6 +42,12 @@ Type: `String`
 
 The file that the task should output the results to. If `output` is specified, the task will always complete and not throw an error code if errors are found. The CI will determine if the build failed or not.
 
+#### silent
+Type: `Boolean`  
+
+Setting `silent` to true will prevent the results from being printed using stdout.
+
+
 #### urls
 Type: `Array`  
 Default: `[]`

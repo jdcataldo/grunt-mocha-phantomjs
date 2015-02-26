@@ -30,8 +30,9 @@ module.exports = function(grunt) {
         done           = this.async(),
         errors         = 0,
         results        = '',
-        output         = options.output || false;
-    
+        output         = options.output || false,
+        silent         = options.silent || false;
+
     if(output) {
       grunt.file.mkdir(path.dirname(output));
       var writeStream = fs.createWriteStream(output);
@@ -75,6 +76,7 @@ module.exports = function(grunt) {
       });
     });
 
+
     async.eachSeries(urls, function(f, next) {
       var phantomjs = grunt.util.spawn({
         cmd: phantomjs_path,
@@ -83,8 +85,10 @@ module.exports = function(grunt) {
         next();
       });
 
-      phantomjs.stdout.pipe(process.stdout);
-      phantomjs.stderr.pipe(process.stderr);
+      if(!silent) {
+        phantomjs.stdout.pipe(process.stdout);
+        phantomjs.stderr.pipe(process.stderr);
+      }
 
       // Write output to file
       if(output) {
