@@ -31,7 +31,8 @@ module.exports = function(grunt) {
         errors         = 0,
         results        = '',
         output         = options.output || false,
-        silent         = options.silent || false;
+        silent         = options.silent || false,
+        fail           = options.fail || false;
 
     if(output) {
       grunt.file.mkdir(path.dirname(output));
@@ -103,13 +104,14 @@ module.exports = function(grunt) {
       });
 
     }, function(){
-      // Fail if errors are reported and we aren't outputing to a file
-      if(!output && errors > 0) {
-        grunt.fail.warn(errors + " tests failed");
-      }
-
+    
       if(output) {
         writeStream.end();
+      }
+
+      // Fail if errors are reported and if we have indicated that we want to fail
+      if(fail && errors > 0) {
+        grunt.fail.warn(errors + " tests failed");
       }
 
       done();
