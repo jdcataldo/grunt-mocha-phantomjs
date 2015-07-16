@@ -28,10 +28,10 @@
     "node": ">= 0.10.0"
   },
   "dependencies": {
-    "mocha-phantomjs": "~3.5.0",
-    "phantomjs": "1.9.1 - 1.9.7-15",
+    "async": "~0.2",
     "lodash": "2.4.1",
-    "async": "~0.2"
+    "mocha-phantomjs": "^3.6.0",
+    "phantomjs": "1.9.1 - 1.9.7-15"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.8.0",
