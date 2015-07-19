@@ -40,13 +40,17 @@ The reporter that should be used. See [the supported reporters](https://github.c
 #### output
 Type: `String`  
 
-The file that the task should output the results to. If `output` is specified, the task will always complete and not throw an error code if errors are found. The CI will determine if the build failed or not.
+The file that the task should output the results to. 
 
 #### silent
 Type: `Boolean`  
 
 Setting `silent` to true will prevent the results from being printed using stdout.
 
+#### fail
+Type: `Boolean`  
+
+If `fail` is set to false (default), the task will always complete and not throw an error code if errors are found. In this case the CI will determine if the build failed or not whether through the output file or stdout. If set to true, the task will fail if there are failed tests.
 
 #### urls
 Type: `Array`  
