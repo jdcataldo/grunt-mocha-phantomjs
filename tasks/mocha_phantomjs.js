@@ -12,75 +12,54 @@ module.exports = function(grunt) {
   var _       = require('lodash'),
       async   = require('async'),
       path    = require("path"),
-      exists  = grunt.file.exists,
       fs      = require('fs');
+
+  var lookup = function(script, executable) {
+      for (var i = 0; i < module.paths.length; i++) {
+        var absPath = path.join(module.paths[i], script);
+        if (executable && process.platform === 'win32') {
+          absPath += '.cmd';
+        }
+        if (fs.existsSync(absPath)) {
+          return absPath;
+        }
+      }
+      grunt.fail.warn('Unable to find ' +  script);
+    };
 
   grunt.registerMultiTask('mocha_phantomjs', 'Run client-side mocha test with phantomjs.', function() {
     // Merge options
-    var options        = this.options({
+    var options          = this.options({
           reporter: 'spec',
           // Non file urls to test
-          urls: []
+          urls: [],
+
         }),
-        files          = this.filesSrc,
-        args           = [],
-        binPath        = '.bin/mocha-phantomjs' + (process.platform === 'win32' ? '.cmd' : ''),
-        phantomjs_path = path.join(__dirname, '..', '/node_modules/', binPath),
-        urls           = options.urls.concat(this.filesSrc),
-        done           = this.async(),
-        errors         = 0,
-        results        = '',
-        output         = options.output || false,
-        silent         = options.silent || false;
+        config           = _.extend({ useColors: true }, options.config),
+        files            = this.filesSrc,
+        args             = [],
+        phantomPath      = lookup('phantomjs/bin/phantomjs', true),
+        mochaPhantomPath = lookup('mocha-phantomjs-core/mocha-phantomjs-core.js'),
+        urls             = options.urls.concat(this.filesSrc),
+        done             = this.async(),
+        errors           = 0,
+        results          = '',
+        output           = options.output || false,
+        silent           = options.silent || false;
 
     if(output) {
       grunt.file.mkdir(path.dirname(output));
       var writeStream = fs.createWriteStream(output);
     }
 
-    // disable color if we so choose
-    if (grunt.option('color') === false) {
-      args.push('--no-color');
+    if(grunt.option('color') === false) {
+      options.config.useColors = false;
     }
-
-    // Check for a local install of mocha-phantomjs to use
-    if (!exists(phantomjs_path)) {
-      var i = module.paths.length,
-          bin;
-      while(i--) {
-        bin = path.join(module.paths[i], binPath);
-        if (exists(bin)) {
-          phantomjs_path = bin;
-          break;
-        }
-      }
-    }
-
-    if(!exists(phantomjs_path)) {
-      grunt.fail.warn('Unable to find mocha-phantomjs.');
-    }
-
-    // Loop through the options and add them to args
-    // Omit urls from the options to be passed through
-    _.each(_.omit(options, 'urls', 'output'), function(value, key) {
-      // Convert to the key to a switch
-      var sw = (key.length > 1 ? '--' : '-') + key;
-      // Add the switch and its value
-      // If the value is an array, add all array elements to the array.
-      if(!_.isArray(value)) {
-        value = [value];
-      }
-
-      value.forEach(function(value) {
-        args.push([sw, value.toString()]);
-      });
-    });
-
 
     async.eachSeries(urls, function(f, next) {
       var phantomjs = grunt.util.spawn({
-        cmd: phantomjs_path,
-        args: _.flatten([f].concat(args))
+        cmd: phantomPath,
+        args: _.flatten([mochaPhantomPath, f, options.reporter, JSON.stringify(config)])
       }, function(error, result, code) {
         next();
       });

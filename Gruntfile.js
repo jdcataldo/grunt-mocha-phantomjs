@@ -32,7 +32,7 @@ module.exports = function(grunt) {
     mocha_phantomjs: {
       no_output: {
         options: {
-          'reporter': 'dot'
+          reporter: 'dot',
         },
         files: {
           src: ['test/index.html']
@@ -40,8 +40,33 @@ module.exports = function(grunt) {
       },
       output: {
         options: {
-          'reporter': 'xunit',
-          'output': 'results/result.xml'
+          reporter: 'xunit',
+          output: 'results/result.xml'
+        },
+        files: {
+          src: ['test/index.html']
+        }
+      },
+      grep: {
+        options: {
+          reporter: 'dot',
+          config: {
+            grep: 'not'
+          }
+        },
+        files: {
+          src: ['test/index.html']
+        }
+      },
+      viewport: {
+        options: {
+          reporter: 'dot',
+          config: {
+            viewportSize: {
+                width: 1024,
+                height: 768
+            }
+          }
         },
         files: {
           src: ['test/index.html']
@@ -49,9 +74,9 @@ module.exports = function(grunt) {
       },
       silent: {
         options: {
-          'reporter': 'xunit',
-          'output': 'results/results_silent.xml',
-          'silent': true
+          reporter: 'xunit',
+          output: 'results/results_silent.xml',
+          silent: true
         },
         files: {
           src: ['test/index.html']
@@ -60,14 +85,14 @@ module.exports = function(grunt) {
       server: {
         options: {
           urls: ['http://localhost:8000/test/index.html'],
-          'reporter': 'dot'
+          reporter: 'dot'
         }
       },
       coverage: {
         options: {
           urls: ['http://localhost:8000/test-cov/index.html'],
-          'reporter': 'json-cov',
-          'output': 'results/coverage.json'
+          reporter: 'json-cov',
+          output: 'results/coverage.json'
         }
       }
     }

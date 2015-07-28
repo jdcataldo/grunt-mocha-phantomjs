@@ -1,6 +1,6 @@
 # grunt-mocha-phantomjs
 
-> A simple wrapper to run client-side mocha tests using [mocha-phantomjs](http://metaskills.net/mocha-phantomjs/)
+> A simple wrapper to run client-side mocha tests using [mocha-phantomjs](http://metaskills.net/mocha-phantomjs/) core library
 
 [![Build Status](https://travis-ci.org/jdcataldo/grunt-mocha-phantomjs.png)](https://travis-ci.org/jdcataldo/grunt-mocha-phantomjs)
 
@@ -56,6 +56,12 @@ Absolute `http://` or `https://` urls to be passed to PhantomJS. Specified URLs 
 
 Additional arguments may be passed. See [mocha-phantomjs's](https://github.com/metaskills/mocha-phantomjs#usage) usage.
 
+#### config
+Type: `Object`  
+Default: `{ useColors: true }`
+
+Options to be passed to mocha-phantomjs. See [mocha-phantomjs-core's](https://github.com/nathanboktae/mocha-phantomjs-core#usage) usage.
+
 ### Usage examples
 
 #### Basic usage (CI checks for error code)
@@ -76,8 +82,31 @@ grunt.initConfig({
 grunt.initConfig({
   mocha_phantomjs: {
     options: {
-      'reporter': 'xunit',
-      'output': 'tests/results/result.xml'
+      reporter: 'xunit',
+      output: 'tests/results/result.xml'
+    },
+    all: ['test/**/*.html']
+  }
+});
+```
+
+#### Passing options to mocha-phantomjs
+
+```js
+// Project configuration.
+grunt.initConfig({
+  mocha_phantomjs: {
+    options: {
+      reporter: 'xunit',
+      output: 'tests/results/result.xml',
+      config: {
+        useColors: false,
+        viewportSize: {
+            width: 1024,
+            height: 768
+        },
+        grep: 'pattern'
+      }
     },
     all: ['test/**/*.html']
   }
@@ -116,7 +145,8 @@ grunt.registerTask('test', ['connect', 'mocha_phantomjs']);
 
 ## Release History
 
-* 2015-07-16   v0.7.0   Upgrad mocha-phantomjs to 3.6.0
+* 2015-07-16   v1.0.0   *BREAKING* use mocha-phantomjs-core
+* 2015-07-16   v0.7.0   Upgrade mocha-phantomjs to 3.6.0
 * 2015-07-15   v0.6.2   Lock down phantomjs to match mocha-phantomjs peerDependency
 * 2015-02-26   v0.6.1   Add silent option to suppress stdout
 * 2014-07-24   v0.6.0   Upgrade mocha-phantomjs to 3.5.0 and drops node 0.8 support
