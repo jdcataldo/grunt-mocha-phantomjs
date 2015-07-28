@@ -2,7 +2,8 @@
 
 > A simple wrapper to run client-side mocha tests using [mocha-phantomjs](http://metaskills.net/mocha-phantomjs/) core library
 
-[![Build Status](https://travis-ci.org/jdcataldo/grunt-mocha-phantomjs.png)](https://travis-ci.org/jdcataldo/grunt-mocha-phantomjs)
+[![Build Status](https://travis-ci.org/jdcataldo/grunt-mocha-phantomjs.svg?branch=master)](https://travis-ci.org/jdcataldo/grunt-mocha-phantomjs)
+[![Downloads](https://img.shields.io/npm/dm/grunt-mocha-phantomjs.svg)](https://www.npmjs.com/package/grunt-mocha-phantomjs)
 
 ## Getting Started
 This plugin requires Grunt `~0.4.0`
