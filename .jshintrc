@@ -10,5 +10,6 @@
   "boss": true,
   "eqnull": true,
   "node": true,
-  "es5": false
+  "es5": false,
+  "quotmark": "single"
 }
