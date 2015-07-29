@@ -9,17 +9,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/jdcataldo/grunt-mocha-phantomjs.git"
+    "url": "https://github.com/jdcataldo/grunt-mocha-phantomjs.git"
   },
   "bugs": {
     "url": "https://github.com/jdcataldo/grunt-mocha-phantomjs/issues"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/jdcataldo/grunt-mocha-phantomjs/blob/master/LICENSE-MIT"
-    }
-  ],
+  "license": "MIT",
   "scripts": {
     "test": "grunt"
   },
@@ -43,9 +38,11 @@
     "grunt": "~0.4.0"
   },
   "keywords": [
+    "grunt",
     "gruntplugin",
     "mocha",
     "mocha-phantomjs",
+    "mocha-phantomjs-core",
     "phantomjs"
   ]
 }
