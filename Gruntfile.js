@@ -2,7 +2,7 @@
  * grunt-mocha-phantomjs
  * https://github.com/jdcataldo/grunt-mocha-phantomjs
  *
- * Copyright (c) 2013 Justin Cataldo
+ * Copyright (c) 2013-2015 Justin Cataldo
  * Licensed under the MIT license.
  */
 
@@ -18,21 +18,21 @@ module.exports = function(grunt) {
         'tasks/*.js'
       ],
       options: {
-        jshintrc: '.jshintrc',
+        jshintrc: '.jshintrc'
       },
     },
     connect: {
       server: {
         options: {
           port: 8000,
-          base: '.',
+          base: '.'
         }
       }
     },
     mocha_phantomjs: {
       no_output: {
         options: {
-          reporter: 'dot',
+          reporter: 'dot'
         },
         files: {
           src: ['test/index.html']
@@ -103,5 +103,4 @@ module.exports = function(grunt) {
   grunt.loadTasks('tasks');
 
   grunt.registerTask('default', ['jshint', 'connect', 'mocha_phantomjs']);
-
 };
