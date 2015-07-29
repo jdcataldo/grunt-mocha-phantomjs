@@ -24,7 +24,6 @@
   },
   "dependencies": {
     "async": "^1.4.0",
-    "grunt": "^0.4.5",
     "lodash": "^3.10.0",
     "mocha-phantomjs-core": "^1.0.1",
     "phantomjs": "^1.9.17"
@@ -34,6 +33,9 @@
     "grunt-contrib-connect": "^0.10.1",
     "grunt-contrib-jshint": "^0.11.2",
     "mocha": "^2.2.5"
+  },
+  "peerDependencies": {
+    "grunt": "^0.4.5"
   },
   "keywords": [
     "grunt",
