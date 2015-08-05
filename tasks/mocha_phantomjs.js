@@ -53,7 +53,7 @@ module.exports = function(grunt) {
     }
 
     if(grunt.option('color') === false) {
-      options.config.useColors = false;
+      config.useColors = false;
     }
 
     async.eachSeries(urls, function(f, next) {
