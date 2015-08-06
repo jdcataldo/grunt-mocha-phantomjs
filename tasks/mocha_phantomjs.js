@@ -11,20 +11,19 @@
 module.exports = function(grunt) {
   var _       = require('lodash'),
       async   = require('async'),
-      path    = require("path"),
-      fs      = require('fs');
+      path    = require('path'),
+      fs      = require('fs'),
+      phantomjsModule = require('phantomjs');
 
-  var lookup = function(script, executable) {
+
+    var lookup = function(script) {
       for (var i = 0; i < module.paths.length; i++) {
         var absPath = path.join(module.paths[i], script);
-        if (executable && process.platform === 'win32') {
-          absPath += '.cmd';
-        }
         if (fs.existsSync(absPath)) {
           return absPath;
         }
       }
-      grunt.fail.warn('Unable to find ' +  script);
+      grunt.fail.warn('Unable to find ' + script);
     };
 
   grunt.registerMultiTask('mocha_phantomjs', 'Run client-side mocha test with phantomjs.', function() {
@@ -32,13 +31,13 @@ module.exports = function(grunt) {
     var options          = this.options({
           reporter: 'spec',
           // Non file urls to test
-          urls: [],
+          urls: []
 
         }),
         config           = _.extend({ useColors: true }, options.config),
         files            = this.filesSrc,
         args             = [],
-        phantomPath      = lookup('phantomjs/bin/phantomjs', true),
+        phantomPath      = phantomjsModule.path,
         mochaPhantomPath = lookup('mocha-phantomjs-core/mocha-phantomjs-core.js'),
         urls             = options.urls.concat(this.filesSrc),
         done             = this.async(),
