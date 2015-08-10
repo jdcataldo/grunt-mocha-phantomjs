@@ -18,7 +18,7 @@ module.exports = function(grunt) {
       for (var i = 0; i < module.paths.length; i++) {
         var absPath = path.join(module.paths[i], script);
         if (executable && process.platform === 'win32') {
-          absPath += '.cmd';
+          absPath += '.exe';
         }
         if (fs.existsSync(absPath)) {
           return absPath;
@@ -38,7 +38,7 @@ module.exports = function(grunt) {
         config           = _.extend({ useColors: true }, options.config),
         files            = this.filesSrc,
         args             = [],
-        phantomPath      = lookup('phantomjs/bin/phantomjs', true),
+        phantomPath      = lookup('phantomjs/lib/phantom/phantomjs', true),
         mochaPhantomPath = lookup('mocha-phantomjs-core/mocha-phantomjs-core.js'),
         urls             = options.urls.concat(this.filesSrc),
         done             = this.async(),
