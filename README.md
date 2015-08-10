@@ -146,7 +146,8 @@ grunt.registerTask('test', ['connect', 'mocha_phantomjs']);
 
 ## Release History
 
-* 2015-09-09   v1.0.1   fix issue when using --color=false
+* 2015-09-09   v1.0.1   Fix path to phantomjs binary on windows
+* 2015-09-09   v1.0.1   Fix issue when using --color=false
 * 2015-07-16   v1.0.0   *BREAKING* use mocha-phantomjs-core
 * 2015-07-16   v0.7.0   Upgrade mocha-phantomjs to 3.6.0
 * 2015-07-15   v0.6.2   Lock down phantomjs to match mocha-phantomjs peerDependency
