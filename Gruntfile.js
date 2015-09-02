@@ -8,31 +8,25 @@
 
 'use strict';
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
   // Project configuration.
   grunt.initConfig({
-    jshint: {
-      all: [
-        'Gruntfile.js',
-        'tasks/*.js'
-      ],
-      options: {
-        jshintrc: '.jshintrc',
-      },
+    eslint: {
+      all: ['Gruntfile.js', 'tasks/*.js', 'test/*.js']
     },
     connect: {
       server: {
         options: {
           port: 8000,
-          base: '.',
+          base: '.'
         }
       }
     },
     mocha_phantomjs: {
       no_output: {
         options: {
-          reporter: 'dot',
+          reporter: 'dot'
         },
         files: {
           src: ['test/index.html']
@@ -63,8 +57,8 @@ module.exports = function(grunt) {
           reporter: 'dot',
           config: {
             viewportSize: {
-                width: 1024,
-                height: 768
+              width: 1024,
+              height: 768
             }
           }
         },
@@ -99,9 +93,9 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-eslint');
   grunt.loadTasks('tasks');
 
-  grunt.registerTask('default', ['jshint', 'connect', 'mocha_phantomjs']);
+  grunt.registerTask('default', ['eslint', 'connect', 'mocha_phantomjs']);
 
 };
