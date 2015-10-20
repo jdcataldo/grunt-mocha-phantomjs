@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "async": "^1.4.0",
-    "mocha-phantomjs-core": "^1.0.0",
+    "mocha-phantomjs-core": "^1.2.0",
     "object-assign": "^4.0.1",
     "phantomjs": "^1.9.17"
   },
