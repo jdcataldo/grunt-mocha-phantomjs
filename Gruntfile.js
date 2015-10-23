@@ -9,7 +9,6 @@
 'use strict';
 
 module.exports = function (grunt) {
-
   // Project configuration.
   grunt.initConfig({
     eslint: {
@@ -97,5 +96,4 @@ module.exports = function (grunt) {
   grunt.loadTasks('tasks');
 
   grunt.registerTask('default', ['eslint', 'connect', 'mocha_phantomjs']);
-
 };

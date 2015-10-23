@@ -84,7 +84,6 @@ module.exports = function (grunt) {
         }
         errors += code;
       });
-
     }, function () {
       // Fail if errors are reported and we aren't outputing to a file
       if (reportFailure && errors > 0) {
@@ -98,5 +97,4 @@ module.exports = function (grunt) {
       done();
     });
   });
-
 };
