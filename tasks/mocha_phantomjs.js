@@ -33,6 +33,18 @@ module.exports = function (grunt) {
         return flattened.concat.apply(flattened, arr);
       };
 
+  function objectToArgArray (obj) {
+    var key,
+        args = [];
+
+    for (key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        args.push(key + '=' + obj[key]);
+      }
+    }
+    return args;
+  }
+
   grunt.registerMultiTask('mocha_phantomjs', 'Run client-side mocha test with phantomjs.', function () {
     // Merge options
     var options          = this.options({
@@ -41,6 +53,7 @@ module.exports = function (grunt) {
         }),
         config           = objectAssign({ useColors: true }, options.config),
         phantomPath      = lookup('.bin/phantomjs', true),
+        phantomConfig    = objectToArgArray(options.phantomConfig || []),
         mochaPhantomPath = lookup('mocha-phantomjs-core/mocha-phantomjs-core.js'),
         urls             = options.urls.concat(this.filesSrc),
         done             = this.async(),
@@ -61,9 +74,14 @@ module.exports = function (grunt) {
     }
 
     async.eachSeries(urls, function (f, next) {
-      var phantomjs = grunt.util.spawn({
+      var args,
+          phantomjs;
+
+      args = phantomConfig.concat(flatten([mochaPhantomPath, f, options.reporter, JSON.stringify(config)]));
+
+      phantomjs = grunt.util.spawn({
         cmd: phantomPath,
-        args: flatten([mochaPhantomPath, f, options.reporter, JSON.stringify(config)])
+        args: args
       }, function () {
         next();
       });
