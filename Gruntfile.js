@@ -65,6 +65,16 @@ module.exports = function (grunt) {
           src: ['test/index.html']
         }
       },
+      phantomConfig: {
+        options: {
+          phantomConfig: {
+            '--debug': true
+          }
+        },
+        files: {
+          src: ['test/index.html']
+        }
+      },
       silent: {
         options: {
           reporter: 'xunit',

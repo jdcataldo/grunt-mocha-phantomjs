@@ -33,9 +33,11 @@ module.exports = function (grunt) {
         return flattened.concat.apply(flattened, arr);
       };
 
-  function objectToArgArray(obj) {
-    var args = [];
-    for (var key in obj) {
+  function objectToArgArray (obj) {
+    var key,
+        args = [];
+
+    for (key in obj) {
       if (obj.hasOwnProperty(key)) {
         args.push(key + '=' + obj[key]);
       }
@@ -72,10 +74,12 @@ module.exports = function (grunt) {
     }
 
     async.eachSeries(urls, function (f, next) {
+      var args,
+          phantomjs;
 
-      var args = phantomConfig.concat(flatten([mochaPhantomPath, f, options.reporter, JSON.stringify(config)]));
+      args = phantomConfig.concat(flatten([mochaPhantomPath, f, options.reporter, JSON.stringify(config)]));
 
-      var phantomjs = grunt.util.spawn({
+      phantomjs = grunt.util.spawn({
         cmd: phantomPath,
         args: args
       }, function () {
