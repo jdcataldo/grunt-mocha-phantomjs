@@ -61,6 +61,21 @@ Absolute `http://` or `https://` urls to be passed to PhantomJS. Specified URLs 
 
 Additional arguments may be passed. See [mocha-phantomjs's](https://github.com/metaskills/mocha-phantomjs#usage) usage.
 
+#### phantomConfig
+Type: `Object`
+Default: `{}`
+
+Options to be passed directly to phantomjs. Eg:
+
+```js
+{
+    "--local-storage-path": "my/temp-phantom-files",
+    "--local-storage-quota": "20480"
+}
+```
+
+See `phantomjs -h` for more full options list.
+
 #### config
 Type: `Object`  
 Default: `{ useColors: true }`
