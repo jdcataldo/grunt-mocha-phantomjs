@@ -10,7 +10,7 @@
     "async": "^1.4.0",
     "mocha-phantomjs-core": "^1.0.0",
     "object-assign": "^4.0.1",
-    "phantomjs": "1.9.1 - 1.9.7-15"
+    "phantomjs": "2.1.2"
   },
   "devDependencies": {
     "chai": "^3.2.0",
