@@ -163,35 +163,5 @@ grunt.initConfig({
 grunt.registerTask('test', ['connect', 'mocha_phantomjs']);
 ```
 
-## Release History
-
-* 2016-02-05   v2.0.1   adds a phantomConfig option for setting phantomjs specific settings
-* 2015-09-02   v2.0.0   adds a failWithOutput option for failing a build and also providing a test artifact
-* 2015-08-09   v1.0.2   Fix path to phantomjs binary on windows
-* 2015-08-09   v1.0.1   Fix issue when using --color=false
-* 2015-07-16   v1.0.0   *BREAKING* use mocha-phantomjs-core
-* 2015-07-16   v0.7.0   Upgrade mocha-phantomjs to 3.6.0
-* 2015-07-15   v0.6.2   Lock down phantomjs to match mocha-phantomjs peerDependency
-* 2015-02-26   v0.6.1   Add silent option to suppress stdout
-* 2014-07-24   v0.6.0   Upgrade mocha-phantomjs to 3.5.0 and drops node 0.8 support
-* 2014-05-08   v0.5.0   Upgrade mocha-phantomjs to 3.4.0
-* 2014-03-01   v0.4.3   Add lodash and async as dependencies
-* 2014-02-18   v0.4.2   Fix to prevent the stream from closing
-* 2014-02-18   v0.4.1   Pipe stdout to a file if supplied
-* 2014-01-14   v0.4.0   Upgrade mocha-phantomjs to 3.3.0
-* 2013-10-31   v0.3.2   Upgrade mocha-phantomjs to 3.2.0
-* 2013-10-31   v0.3.1   Added support for --no-color
-* 2013-07-05   v0.3.0   Upgrade mocha-phantomjs to 3.1.0
-* 2013-04-19   v0.2.8   Fix path to mocha-phantomjs binary on windows when not installed with plugin
-* 2013-04-19   v0.2.7   Fixes error thrown when tests pass and no output file specified
-* 2013-04-18   v0.2.6   Fix path to mocha-phantomjs binary on windows
-* 2013-04-18   v0.2.5   Added an output option to write test results to a file for CI support
-* 2013-04-15   v0.2.2   Added exit code to report failed tests with Travis CI
-* 2013-04-11   v0.2.1   Added check for existing local install of mocha-phantomjs
-* 2013-04-08   v0.2.0   Update phantomjs to 1.9.0 to fix unzipping issue
-* 2013-03-27   v0.1.1   Fix to omit urls from being passed to phantomjs
-* 2013-03-27   v0.1.0   Initial release supporting all options for mocha-phantomjs
-
-
 ### Notes
 This is a very basic implementation of mocha-phantomjs. Failed tests and errors do not bubble up for custom reporting. The idea of this is to be mainly used by a CI and let the CI manage the error reporting.
