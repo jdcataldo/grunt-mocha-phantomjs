@@ -165,6 +165,7 @@ grunt.registerTask('test', ['connect', 'mocha_phantomjs']);
 
 ## Release History
 
+* 2016-02-05   v2.0.1   adds a phantomConfig option for setting phantomjs specific settings
 * 2015-09-02   v2.0.0   adds a failWithOutput option for failing a build and also providing a test artifact
 * 2015-08-09   v1.0.2   Fix path to phantomjs binary on windows
 * 2015-08-09   v1.0.1   Fix issue when using --color=false
