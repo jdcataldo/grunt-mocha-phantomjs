@@ -1,3 +1,5 @@
+## 4.0.0
+- adds grunt 1.0 support
 ## 3.0.0
 - upgrades to phantomjs2
 - drops node 0.10.x support

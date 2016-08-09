@@ -1,6 +1,6 @@
 {
   "name": "grunt-mocha-phantomjs",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "Run client-side mocha tests using phantomjs",
   "main": "Gruntfile.js",
   "directories": {
