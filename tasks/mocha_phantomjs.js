@@ -12,26 +12,28 @@ module.exports = function (grunt) {
   var objectAssign = require('object-assign'),
       async        = require('async'),
       path         = require('path'),
-      fs           = require('fs'),
-      lookup       = function (script, executable) {
-        var i = 90,
-            absPath;
+      fs           = require('fs');
 
-        for (i = 0; i < module.paths.length; i++) {
-          absPath = path.join(module.paths[i], script);
-          if (executable && process.platform === 'win32') {
-            absPath += '.cmd';
-          }
-          if (fs.existsSync(absPath)) {
-            return absPath;
-          }
-        }
-        grunt.fail.warn('Unable to find ' + script);
-      },
-      flatten       = function (arr) {
-        var flattened = [];
-        return flattened.concat.apply(flattened, arr);
-      };
+  function lookup (script, executable) {
+    var i = 90,
+        absPath;
+
+    for (i = 0; i < module.paths.length; i++) {
+      absPath = path.join(module.paths[i], script);
+      if (executable && process.platform === 'win32') {
+        absPath += '.cmd';
+      }
+      if (fs.existsSync(absPath)) {
+        return absPath;
+      }
+    }
+    grunt.fail.warn('Unable to find ' + script);
+  };
+
+  function flatten (arr) {
+    var flattened = [];
+    return flattened.concat.apply(flattened, arr);
+  };
 
   function objectToArgArray (obj) {
     var key,
