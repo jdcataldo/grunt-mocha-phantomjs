@@ -1,5 +1,7 @@
 # grunt-mocha-phantomjs
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/jdcataldo/grunt-mocha-phantomjs.svg)](https://greenkeeper.io/)
+
 > A simple wrapper to run client-side mocha tests using [mocha-phantomjs](http://metaskills.net/mocha-phantomjs/) core library
 
 [![Build Status](https://travis-ci.org/jdcataldo/grunt-mocha-phantomjs.svg?branch=master)](https://travis-ci.org/jdcataldo/grunt-mocha-phantomjs)
